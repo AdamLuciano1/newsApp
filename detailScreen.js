@@ -6,7 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 class detailScreen extends React.Component {
     render() {
         return (
-        <Text> hey there </Text>
+        <Text> {this.props.itemTitle} {this.props.itemSummary} </Text>
         )
 }
 }

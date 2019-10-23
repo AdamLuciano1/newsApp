@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView, FlatList, Button,TouchableOpacity, 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { StackNavigator } from 'react-navigation';
+import { withNavigation} from 'react-navigation';
 const DATA = [
     {
       aid: 1,
@@ -57,6 +58,7 @@ const DATA = [
         onPress={() => {
           this.props.navigation.navigate('details', {
               itemTitle: {title},
+              itemSummary: {asummary},
             });
           }}
         >
@@ -68,7 +70,6 @@ const DATA = [
   }
 class listScreen extends React.Component {
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <ScrollView style={styles.container}>
               <FlatList
@@ -96,6 +97,4 @@ class listScreen extends React.Component {
           fontSize: 22,
         },
       });
-      
-  
-  export default listScreen
+      export withNavigation(listScreen)

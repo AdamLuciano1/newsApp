@@ -52,11 +52,11 @@ const DATA = [
         asummary: '',
       },
   ];
-  function Item({ title }) {
+  function Item({ title, navigate }) {
     return (
         <TouchableOpacity 
         onPress={() => {
-          this.props.navigation.navigate('details', {
+          navigate('details', {
               itemTitle: {title},
               itemSummary: {asummary},
             });
@@ -70,11 +70,12 @@ const DATA = [
   }
 class listScreen extends React.Component {
     render() {
+      const { navigate } = this.props.navigation;
         return (
             <ScrollView style={styles.container}>
               <FlatList
                 data={DATA}
-                renderItem={({ item }) =>  <Item title={item.atitle} />}
+                renderItem={({ item }) =>  <Item title={item.atitle} navigate={navigate} />}
                 keyExtractor={item => item.aid}
               />
             </ScrollView>
@@ -97,4 +98,5 @@ class listScreen extends React.Component {
           fontSize: 22,
         },
       });
-      export withNavigation(listScreen)
+
+export default withNavigation(listScreen);

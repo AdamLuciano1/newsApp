@@ -9,14 +9,15 @@ class App extends React.Component {
   render() {
   return (
     <View style={styles.container}>
-      <Text style = {{fontFamily: 'Menlo', fontSize: 40, marginTop: "40%", color: 'white'}}> Welcome to Pace News </Text>
-      <View>
-        <TouchableHighlight 
-        onPress = {() => this.props.navigation.navigate('list')}
-        >
-          <View style = {styles.contButton}><Text style = {styles.buttonText}> Continue </Text></View>
-        </TouchableHighlight>
+      <View style={{ flex: 5 }}>
+        <Text style = {{ fontSize: 40, marginTop: "40%", color: 'white', textAlign: 'center'}}> Welcome to Pace News </Text>
       </View>
+      <TouchableHighlight 
+      onPress = {() => this.props.navigation.navigate('list')}
+      style={{ flex: 1 }}
+      >
+        <View style = {styles.contButton}><Text style = {styles.buttonText}> Continue </Text></View>
+      </TouchableHighlight>
     </View>
   );
 }
@@ -37,16 +38,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#668cff',
     alignItems: 'center',
+    justifyContent: 'center',
+    margin: 0,
+    padding: 0,
   },
   contButton: {
-    marginTop: "99%",
+    fontSize: 30,
     backgroundColor: "#3366ff",
     width: 250,
     height: 80,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonText: {
     color: 'white',
-    fontFamily: 'Menlo',
   },
 });
 

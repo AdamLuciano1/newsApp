@@ -38,7 +38,7 @@ const DATA = [
       {
         aid: 7,
         atitle: 'Life Discovered on Mars',
-        asummary: '',
+        asummary: 'Gilbert V. Levin, who was principal investigator on a NASA experiment that sent Viking landers to Mars in 1976, published an article in the Scientific American journal last Thursday, arguing the experiment\'s positive results were proof of life on the red planet.',
       },
       {
         aid: 8,

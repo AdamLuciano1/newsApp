@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList, Button,TouchableOpacity,  TouchableHighlight, } from 'react-native';
 import { createAppContainer } from 'react-navigation';
@@ -52,13 +51,13 @@ const DATA = [
         asummary: '',
       },
   ];
-  function Item({ title, navigate }) {
+  function Item({ title, summary, navigate }) {
     return (
         <TouchableOpacity 
         onPress={() => {
           navigate('details', {
               itemTitle: {title},
-              itemSummary: {asummary},
+              itemSummary: {summary},
             });
           }}
         >
@@ -75,7 +74,7 @@ class listScreen extends React.Component {
             <ScrollView style={styles.container}>
               <FlatList
                 data={DATA}
-                renderItem={({ item }) =>  <Item title={item.atitle} navigate={navigate} />}
+                renderItem={({ item }) =>  <Item title={item.atitle} summary={item.asummary} navigate={navigate} />}
                 keyExtractor={item => item.aid}
               />
             </ScrollView>
@@ -100,3 +99,4 @@ class listScreen extends React.Component {
       });
 
 export default withNavigation(listScreen);
+

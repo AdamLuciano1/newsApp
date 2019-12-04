@@ -4,6 +4,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { StackNavigator } from 'react-navigation';
 import { withNavigation} from 'react-navigation';
+
+import firebase from './firebase';
+
 const DATA = [
     {
       aid: 1,
@@ -68,35 +71,50 @@ const DATA = [
     );
   }
 class listScreen extends React.Component {
-    render() {
-      const { navigate } = this.props.navigation;
-        return (
-            <ScrollView style={styles.container}>
-              <FlatList
-                data={DATA}
-                renderItem={({ item }) =>  <Item title={item.atitle} summary={item.asummary} navigate={navigate} />}
-                keyExtractor={item => item.aid}
-              />
-            </ScrollView>
-          );
-        }
-    
-    }
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: '#668cff',
-        },
-        item: {
-          backgroundColor: 'white',
-          padding: 20,
-          marginVertical: 8,
-          marginHorizontal: 16,
-        },
-        title: {
-          fontSize: 22,
-        },
-      });
+  state = {
+    news: null
+  }
+
+  componentDidMount() {
+    firebase.ref('/').once('value')
+      .then(snapshot => this.setState({ news: snapshot.val() }))
+  }
+
+  componentDidUpdate() {
+    console.log('news', this.state.news);
+  }
+
+  render() {
+    if (!this.state.news) return null;
+
+    const { navigate } = this.props.navigation;
+    return (
+      <ScrollView style={styles.container}>
+        <FlatList
+          data={this.state.news}
+          renderItem={({ item }) => item && <Item title={item.title} summary={item.description} navigate={navigate} />}
+          keyExtractor={(item, i) => i.toString()}
+        />
+      </ScrollView>
+    );
+  } 
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#668cff',
+  },
+  item: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 22,
+  },
+});
 
 export default withNavigation(listScreen);
 

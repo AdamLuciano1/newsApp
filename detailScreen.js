@@ -1,34 +1,51 @@
 
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList, Button, TouchableHighlight, } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { StyleSheet, Text, View, ScrollView, Image, Dimensions } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 class detailScreen extends React.Component {
     render() {
-        console.log(this.props)
+        const { title, description, sub_title, author, image } = this.props.navigation.state.params.item;
+
         return (
-            <View style = {styles.container}>
-        <Text style = {styles.title}> {this.props.navigation.state.params.itemTitle.title} </Text>
-        <Text style = {styles.summary}> {this.props.navigation.state.params.itemSummary.summary} </Text>
-        </View>
+            <ScrollView style={{ flex: 1 }}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.author}>{author}</Text>
+                    {image && <Image source={{ uri: image }} style={styles.image} />}
+                    <Text style={styles.summary}>{description}</Text>
+                </View>
+            </ScrollView>
         )
-}
+    }
 }
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#668cff',
-      alignItems: 'center',
+      backgroundColor: '#fcfcfc',
+      paddingHorizontal: 10,
+      paddingBottom: 20,
+      paddingTop: 5,
     },
     title: {
-        fontSize: 40,
-        color: 'white',
-        marginTop: "10%",
+        fontSize: 26,
+        color: '#333',
+    },
+    author: {
+        fontSize: 16,
+        color: '#888',
     },
     summary: {
-        fontSize: 24,
-        color: 'white',
-        marginTop: "20%"
+        fontSize: 18,
+        color: '#444',
+        marginTop: 30,
+        lineHeight: 24,
+    },
+    image: {
+        width: screenWidth,
+        height: 200,
+        marginLeft: -10,
+        marginTop: 20,
     }
   });
 export default detailScreen

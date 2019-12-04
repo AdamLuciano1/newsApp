@@ -1,75 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList, Button,TouchableOpacity,  TouchableHighlight, } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { StackNavigator } from 'react-navigation';
+import { StyleSheet, Text, ScrollView, FlatList,TouchableOpacity, View } from 'react-native';
 import { withNavigation} from 'react-navigation';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import firebase from './firebase';
 
-const DATA = [
-    {
-      aid: 1,
-      atitle: 'Lakers Beat Clippers',
-      asummary: 'The lakers beat the clippers in an exciting game last night, coming back from a 20 point deficit at half time to take the game. Coach Frank Vogel said afer the game that he contributes the win to the improvements they have made in practive over the offseason.'
-    },
-    {
-      aid: 2,
-      atitle: 'Officer Saves Dog',
-      asummary: 'Pinellas Park police Officer Joseph Puglia tells ABC Action News in Tampa his heart “really sank until I started seeing him breathing.” The dog wandered onto Interstate 275 in Tampa on Monday.',
-    },
-    {
-      aid: 3,
-      atitle: 'Virginia Bans Trick or Treating',
-      asummary: 'While many might think this law is a pretty cruel trick, the ban on big kids is nothing new for Chesapeake. In fact, the penalty was only reduced in March 2019 when city officials loosened the original 1970 ordinance that said kids over 12 years old who were trick or treating could face jail time',
-    },
-    {
-        aid: 4,
-        atitle: 'US-China trade war intensifies',
-        asummary: 'The U.S.-China trade war is officially back on, and U.S. markets sold off on Monday. The Dow Jones Industrial Average, the S&P 500, and the Nasdaq Composite were all down about 3% at the close. The U.S. is set to impose a 10% tariff on an additional $300 billion of Chinese goods in less than a month and China appears to be retaliating by allowing the value of its currency to fall.',
-      },
-      {
-        aid: 5,
-        atitle: 'Ancient Skeletons Discovered in Egypt',
-        asummary: '',
-      },
-      {
-        aid: 6,
-        atitle: 'Pace President Speaks in Gymnasium',
-        asummary: '',
-      },
-      {
-        aid: 7,
-        atitle: 'Life Discovered on Mars',
-        asummary: '',
-      },
-      {
-        aid: 8,
-        atitle: 'Half Life 3 Confirmed by Valve',
-        asummary: '',
-      },
-      {
-        aid: 9,
-        atitle: 'Flight Attendants Accused of Money Laundering',
-        asummary: '',
-      },
-  ];
-  function Item({ title, summary, navigate }) {
-    return (
-        <TouchableOpacity 
-        onPress={() => {
-          navigate('details', {
-              itemTitle: {title},
-              itemSummary: {summary},
-            });
-          }}
-        >
+function Item({ item, navigate }) {
+  const { title, sub_title } = item;
+  return (
+    <TouchableOpacity 
+      onPress={() => {
+        navigate('details', {
+            item,
+          });
+        }}
+        activeOpacity={0.6}
+      >
       <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {title}
+        </Text>
+        <Text style={styles.summary} numberOfLines={3}>
+          {sub_title}
+        </Text>
       </View>
-      </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
+}
+
+
 class listScreen extends React.Component {
   state = {
     news: null
@@ -80,10 +39,6 @@ class listScreen extends React.Component {
       .then(snapshot => this.setState({ news: snapshot.val() }))
   }
 
-  componentDidUpdate() {
-    console.log('news', this.state.news);
-  }
-
   render() {
     if (!this.state.news) return null;
 
@@ -92,7 +47,7 @@ class listScreen extends React.Component {
       <ScrollView style={styles.container}>
         <FlatList
           data={this.state.news}
-          renderItem={({ item }) => item && <Item title={item.title} summary={item.description} navigate={navigate} />}
+          renderItem={({ item }) => item && <Item item={item} navigate={navigate} />}
           keyExtractor={(item, i) => i.toString()}
         />
       </ScrollView>
@@ -103,17 +58,25 @@ class listScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#668cff',
+    backgroundColor: '#fcfcfc',
   },
   item: {
-    backgroundColor: 'white',
+    backgroundColor: '#00337F',
     padding: 20,
-    marginVertical: 8,
+    marginVertical: 22,
     marginHorizontal: 16,
+    borderRadius: 20,
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
+    color: '#fff',
+    marginBottom: 6,
+    fontWeight: "500",
   },
+  summary: {
+    fontSize: 16,
+    color: '#fffb',
+  }
 });
 
 export default withNavigation(listScreen);

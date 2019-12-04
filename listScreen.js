@@ -16,17 +16,17 @@ const DATA = [
     {
       aid: 2,
       atitle: 'Officer Saves Dog',
-      asummary: '',
+      asummary: 'Pinellas Park police Officer Joseph Puglia tells ABC Action News in Tampa his heart “really sank until I started seeing him breathing.” The dog wandered onto Interstate 275 in Tampa on Monday.',
     },
     {
       aid: 3,
       atitle: 'Virginia Bans Trick or Treating',
-      asummary: '',
+      asummary: 'While many might think this law is a pretty cruel trick, the ban on big kids is nothing new for Chesapeake. In fact, the penalty was only reduced in March 2019 when city officials loosened the original 1970 ordinance that said kids over 12 years old who were trick or treating could face jail time',
     },
     {
         aid: 4,
         atitle: 'US-China trade war intensifies',
-        asummary: '',
+        asummary: 'The U.S.-China trade war is officially back on, and U.S. markets sold off on Monday. The Dow Jones Industrial Average, the S&P 500, and the Nasdaq Composite were all down about 3% at the close. The U.S. is set to impose a 10% tariff on an additional $300 billion of Chinese goods in less than a month and China appears to be retaliating by allowing the value of its currency to fall.',
       },
       {
         aid: 5,
@@ -41,7 +41,7 @@ const DATA = [
       {
         aid: 7,
         atitle: 'Life Discovered on Mars',
-        asummary: 'Gilbert V. Levin, who was principal investigator on a NASA experiment that sent Viking landers to Mars in 1976, published an article in the Scientific American journal last Thursday, arguing the experiment\'s positive results were proof of life on the red planet.',
+        asummary: '',
       },
       {
         aid: 8,
